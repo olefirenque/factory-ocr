@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
   // Different OCR methods are required, because they have different confidence in different cases
 
   // Works better, but it is harder to make rotation, because it is needed to rotate rectangles
-  async doRectOCR(rectangles) {
+  async doRectOCR(rectangle) {
     const worker = createWorker({
       logger: m => {
       },
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
     await worker.load();
     await worker.loadLanguage('eng');
     await worker.initialize('eng');
-    const data = await worker.recognize(this.imageObj.src, {rectangles});
+    const data = await worker.recognize(this.imageObj.src, {rectangle});
     const {data: {text}} = data;
     this.listArr.push(text);
     await worker.terminate();
@@ -152,12 +152,12 @@ export class AppComponent implements OnInit {
 
   mouseUp() {
     this.drag = false;
-    const rectangles = [{
+    const rectangles = {
       left: this.rect.startX + (this.rect.w < 0 ? this.rect.w : 0),
       top: this.rect.startY + (this.rect.h < 0 ? this.rect.h : 0),
       width: Math.abs(this.rect.w),
       height: Math.abs(this.rect.h),
-    }];
+    };
     this.doCropOCR().then(r => console.log('successful CROP ', r));
     this.doRectOCR(rectangles).then(r => console.log('successful RECT ', r));
   }
