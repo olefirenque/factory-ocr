@@ -1,29 +1,25 @@
 <div style="text-align:center">
 
-  <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+  <div *ngIf="!droppedFiles.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
     <div class="text-wrapper">
       <div class="centered">Drop your file here!</div>
     </div>
   </div>
-  <!--  <div>-->
-  <!--    <input type="file" (change)="readFile($event)">-->
-  <!--  </div>-->
 
-  <div [hidden]="!files.length">
+  <div [hidden]="!droppedFiles.length">
     <div>
       <canvas id="canvas" width="0" height="0"></canvas>
     </div>
     <button mat-button (click)="chooseAnotherFile()">Another image</button>
   </div>
 
-  <h2>Result: </h2>
+  <h2>Status: </h2>
   <p>
-    {{ ocrResult }}
+    {{ status }}
   </p>
   <ul>
-    <li *ngFor="let item of listArr; let i = index" (click)="removeItem(i)">
+    <li *ngFor="let item of recognizedParts; let i = index" (click)="removeItem(i)">
       <label>{{item}}</label>
-      <!--      <button (click)="removeItem(i)" > Remove </button>-->
     </li>
   </ul>
 </div>

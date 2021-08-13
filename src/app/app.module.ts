@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {FileInputModule} from 'ng-uikit-pro-standard';
@@ -13,7 +14,7 @@ import {DragDirective} from './drag.directive';
   imports: [
     BrowserModule,
     FileInputModule,
-    // DragDirective,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
